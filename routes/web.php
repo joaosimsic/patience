@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\VerifyWebhookSignature;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::post('/webhooks/stripe', [WebhookController::class, 'handle'])
+    ->middleware(VerifyWebhookSignature::class);
