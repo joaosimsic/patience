@@ -11,7 +11,7 @@ class VerifyWebhookSignature
     public function handle(Request $request, Closure $next): Response
     {
         $signature = $request->header('X-Webhook-Signature');
-        $secret = config('services.webhook.secret');
+        $secret = (string) config('services.webhook.secret');
 
         if (!$signature) {
             return response(['error' => 'Signature missing'], 401);
